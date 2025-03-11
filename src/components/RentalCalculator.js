@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { Card, CardContent } from "../ui/Card";
-import { Button } from "../ui/Button";
-import { Input } from "../ui/Input";
 import {
   Calculator,
   Clock,
@@ -13,6 +10,7 @@ import {
 } from "lucide-react";
 
 export default function RentalCalculator() {
+  const dateInputRef = React.useRef(null);
   const [hours, setHours] = useState(1);
   const [computers, setComputers] = useState(1);
   const [calculation, setCalculation] = useState({
@@ -145,6 +143,12 @@ export default function RentalCalculator() {
     return "$" + amount.toLocaleString("es-AR");
   };
 
+  const handleDateClick = () => {
+    if (dateInputRef.current) {
+      dateInputRef.current.showPicker();
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-4 font-['Kanit']">
       <div className="w-full max-w-md">
@@ -162,6 +166,54 @@ export default function RentalCalculator() {
             <p className="text-gray-400 text-sm">
               Calcula el costo de alquiler de computadoras
             </p>
+            <div className="text-left mb-2 flex flex-row gap-4 mt-2">
+              <p className="text-gray-400 text-xs">
+                Para calcular el precio de un{" "}
+                <span className="text-purple-400 font-medium">evento</span>{" "}
+                comunicarse directamente por:
+              </p>
+              <a
+                href="https://wa.me/5491135143608"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1 text-gray-400 hover:text-gray-200 rounded  text-xs"
+              >
+                <svg
+                  className="w-3 h-3"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path
+                    d="M11.5 0C5.149 0 0 5.148 0 11.5 0 13.395.53 15.23 1.528 16.852L.106 24l7.285-1.41c1.557.85 3.298 1.3 5.108 1.3 6.352 0 11.5-5.149 11.5-11.5C24 5.149 18.851 0 11.5 0zm0 21c-1.612 0-3.187-.42-4.576-1.216l-.328-.195-3.403.656.678-3.35-.211-.332A9.333 9.333 0 012 11.5C2 6.253 6.253 2 11.5 2 16.747 2 21 6.253 21 11.5 21 16.747 16.747 21 11.5 21z"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                WhatsApp
+              </a>
+              <a
+                href="mailto:ricardo@armadaesports.gg"
+                className="flex items-center justify-center gap-1 text-gray-400 hover:text-gray-200 text-xs"
+              >
+                <svg
+                  className="w-3 h-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                Correo
+              </a>
+            </div>
           </div>
 
           <div className="p-4 space-y-4">
@@ -177,7 +229,7 @@ export default function RentalCalculator() {
                 id="hours"
                 value={hours}
                 onChange={(e) => setHours(Number.parseInt(e.target.value) || 1)}
-                className="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full cursor-pointer bg-gray-700 border-gray-600 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
                 {Array.from({ length: 12 }, (_, i) => {
                   const hour = i + 1;
@@ -204,7 +256,7 @@ export default function RentalCalculator() {
                 onChange={(e) =>
                   setComputers(Number.parseInt(e.target.value) || 1)
                 }
-                className="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full cursor-pointer bg-gray-700 border-gray-600 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               >
                 {Array.from({ length: 10 }, (_, i) => {
                   const computer = i + 1;
@@ -231,54 +283,6 @@ export default function RentalCalculator() {
               <div className="border-t border-gray-700"></div>
 
               <div className="p-4 space-y-4">
-                <div className="bg-gray-700 rounded-lg p-4 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-300 flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      Fecha de reserva
-                    </span>
-                  </div>
-                  <input
-                    type="date"
-                    onChange={(e) => {
-                      const date = e.target.value
-                        ? new Date(e.target.value)
-                        : null;
-                      setSelectedDate(date);
-                      if (date) setReserveErrorMessage("");
-                    }}
-                    className="w-full bg-gray-600 border-gray-500 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  />
-                </div>
-
-                <div className="bg-gray-700 rounded-lg p-4 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-300 flex items-center gap-2">
-                      <Clock3 className="h-4 w-4" />
-                      Hora de reserva
-                    </span>
-                  </div>
-                  <select
-                    value={selectedTime}
-                    onChange={(e) => {
-                      setSelectedTime(e.target.value);
-                      setReserveErrorMessage("");
-                    }}
-                    className="w-full bg-gray-600 border-gray-500 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  >
-                    {Array.from({ length: 13 }, (_, i) => {
-                      const hour = i + 11;
-                      const formattedHour =
-                        hour < 10 ? `0${hour}:00` : `${hour}:00`;
-                      return (
-                        <option key={hour} value={formattedHour}>
-                          {formattedHour}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Precio Original:</span>
@@ -361,6 +365,56 @@ export default function RentalCalculator() {
                       usuario
                     </div>
                   </div>
+                </div>
+
+                <div className="bg-gray-700 rounded-lg p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-300 flex items-center gap-2">
+                      <Calendar className="h-4 w-4 text-white" />
+                      Fecha de reserva
+                    </span>
+                  </div>
+                  <input
+                    onClick={handleDateClick}
+                    ref={dateInputRef}
+                    type="date"
+                    onChange={(e) => {
+                      const date = e.target.value
+                        ? new Date(e.target.value)
+                        : null;
+                      setSelectedDate(date);
+                      if (date) setReserveErrorMessage("");
+                    }}
+                    className="w-full cursor-pointer bg-gray-600 border-gray-500 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-inner-spin-button]:hidden"
+                  />
+                </div>
+
+                <div className="bg-gray-700 rounded-lg p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-300 flex items-center gap-2">
+                      <Clock3 className="h-4 w-4" />
+                      Hora de reserva
+                    </span>
+                  </div>
+                  <select
+                    value={selectedTime}
+                    onChange={(e) => {
+                      setSelectedTime(e.target.value);
+                      setReserveErrorMessage("");
+                    }}
+                    className="w-full cursor-pointer bg-gray-600 border-gray-500 text-white rounded-md p-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  >
+                    {Array.from({ length: 13 }, (_, i) => {
+                      const hour = i + 11;
+                      const formattedHour =
+                        hour < 10 ? `0${hour}:00` : `${hour}:00`;
+                      return (
+                        <option key={hour} value={formattedHour}>
+                          {formattedHour}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
 
                 {reserveErrorMessage && (

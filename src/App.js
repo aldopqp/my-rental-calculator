@@ -1,5 +1,5 @@
-import React from 'react';
-import RentalCalculator from './components/RentalCalculator';
+import React from "react";
+import RentalCalculator from "./components/RentalCalculator";
 
 function App() {
   return (

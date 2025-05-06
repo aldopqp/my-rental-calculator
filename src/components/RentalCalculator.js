@@ -159,17 +159,19 @@ export default function RentalCalculator() {
         </div>
 
         <div className="bg-gray-800 border-gray-700 shadow-xl rounded-lg overflow-hidden">
-          <div className="p-4 border-b border-gray-700">
+          <div className="p-4 border-gray-700">
             <h2 className="text-white text-xl font-bold">
-              Calculadora de Alquiler
+              Reserva tu PC en Armada
             </h2>
             <p className="text-gray-400 text-sm">
-              Calcula el costo de alquiler de computadoras
+              Calcula el costo de alquiler de computadoras y reserva tu turno
             </p>
-            <div className="text-left mb-2 flex flex-row gap-4 mt-2">
-              <p className="text-gray-400 text-xs">
+            <div className="text-left flex flex-row gap-4 mt-2 border-t border-b border-gray-700 py-2">
+              <p className="text-gray-400 text-md">
                 Para calcular el precio de un{" "}
-                <span className="text-purple-400 font-medium">evento</span>{" "}
+                <span className="text-purple-400 font-medium">
+                  evento o sala privada con PS5
+                </span>{" "}
                 comunicarse directamente por:
               </p>
               <a
@@ -216,7 +218,7 @@ export default function RentalCalculator() {
             </div>
           </div>
 
-          <div className="p-4 space-y-4">
+          <div className="p-4 pt-0 space-y-4">
             <div className="space-y-2">
               <label
                 htmlFor="hours"
@@ -248,7 +250,7 @@ export default function RentalCalculator() {
                 className="text-gray-300 flex items-center gap-2"
               >
                 <Computer className="h-4 w-4" />
-                ¿Cuántas computadoras?
+                ¿Cuántas computadoras/usuarios?
               </label>
               <select
                 id="computers"
@@ -274,7 +276,7 @@ export default function RentalCalculator() {
               onClick={calculateNormalPrice}
               className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-colors"
             >
-              <Calculator className="h-4 w-4" /> Calcular Precio
+              <Calculator className="h-4 w-4" /> Reservar
             </button>
           </div>
 
@@ -430,7 +432,7 @@ export default function RentalCalculator() {
                     onClick={handleReserve}
                     className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-colors"
                   >
-                    <CreditCard className="h-4 w-4" /> Reservar Turno
+                    <CreditCard className="h-4 w-4" /> Finalizar reserva
                   </button>
                 )}
 
@@ -438,7 +440,7 @@ export default function RentalCalculator() {
                   onClick={resetCalculator}
                   className="w-full border border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white py-2 px-4 rounded-md flex items-center justify-center gap-2 transition-colors"
                 >
-                  <RefreshCw className="h-4 w-4" /> Reiniciar calculadora
+                  <RefreshCw className="h-4 w-4" /> Volver al incio
                 </button>
               </div>
             </>
